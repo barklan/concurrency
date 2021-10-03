@@ -24,7 +24,7 @@ drawings:
 
 # Concurrency Patterns
 
-in Go
+<span class="pt-4">in Go</span>
 
 <!-- <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">

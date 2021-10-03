@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sync"
 	"time"
+
+	csp "github.com/barklan/concurrency/csp"
 )
 
 func elapsed() func() {
@@ -37,9 +39,11 @@ func launchGoRoutines(num int) {
 }
 
 func main() {
-	defer elapsed()()
+	// defer elapsed()()
 
 	// runtime.GOMAXPROCS(1)
 
-	launchGoRoutines(32)
+	// launchGoRoutines(32)
+
+	csp.F1()
 }
