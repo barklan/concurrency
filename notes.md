@@ -2,13 +2,15 @@
 
 ## Introduction (up to pigeons)
 
-At first some background. So if you look around in the world at large, what you see is a lot of independently executing things. You see people in the audience doing their own thing, there's people outside, there's cars going by. All of those things are independent agents, if you will. And if you think about writing a computer program, if you want to simulate or interact with that environment - a single sequential execution is not a very good approach.
+At first some background. So if you look around in the world at large, what you see is a lot of independently executing things. You see people in the audience doing their own thing, there's people outside, there's cars going by. All of those things are independent agents, if you will.
 
-### Definition of concurrency
+And if you think about writing a computer program, if you want to simulate or interact with that environment - a single sequential execution is not a very good approach.
+
+### Concurrency is not parallelism
 
 And so cuncurrency is really a way of writing or structuring you program to deal with real world. And what I mean by concurrency is the composition of independently executing computations (usually functions, but they don't have to be). Concurrency is a way to structure software. It is not parallelism.
 
-### Concurrency & Parallelism
+### Airport example
 
 If you have only one processor, your program can still be concurrent but it cannot be parallel.
 
@@ -25,68 +27,7 @@ Here moore's law and exponential
 
 ### Languages supporting concurrent programming (в той или иной форме)
 
-Make a slide to display them side by side.
-
-- Ada
-- Alef
-- Alice
-- Ateji PX
-- Axum
-- BMDFM
-- **C++** — std::thread
-- Cω
-- **C#** — supports concurrent computing using lock, yield, also since version 5.0 async and - await keywords introduced
-- Clojure—modern, functional dialect of Lisp on the Java platform
-- Concurrent Clean
-- Concurrent Collections
-- Concurrent ML
-- Concurrent Pascal
-- Curry
-- D
-- E
-- **ECMAScript**
-- Eiffel
-- Elixir
-- Erlang
-- FAUST
-- Fortran
-- **Go** — for system programming, with a concurrent programming model based on CSP
-- **Haskell** — shared memory
-- Hume
-- Io
-- Janus
-- **Java** — thread class or Runnable interface
-- Julia
-- JoCaml
-- Join Java
-- Joule
-- Joyce
-- LabVIEW
-- Limbo
-- MultiLisp
-- Modula-2
-- Modula-3
-- Newsqueak
-- **occam** — influenced heavily by communicating sequential processes (CSP)
-- occam-π
-- Orc
-- Oz-Mozart
-- ParaSail
-- Pict
-- Raku
-- **Python** — uses thread-based parallelism and process-based parallelism
-- Reia
-- Red/System
-- **Rust**
-- Scala
-- SequenceL
-- SR
-- SuperPascal
-- Unicon
-- TNSDL
-- VHSIC
-- XC
-
+Lots of them in some form
 
 ### Concurrency can be implemented at every level
 
@@ -102,11 +43,22 @@ At the programming language level:
 - Coroutines with some form of messaging
 - Futures and promises (async)
 
-## Different Concurrency Models
+### Threading
+
+- problems controlling the optimal level of threads
+- problems if you mant to allocate lots of threads (Java 8 for example aggresively allocates around 1mb for each thread on creation.)
+
+Slide with birds sharing:
+
+- also, the only way to communicate is by sharing memory. This can lead to a series of hard to debug problems, as can be seen below.
+
+## and so: Process calculus (алгебра процессов)
 
 Для такой декомпозиции были придуматы несколько математических моделей (зачем?).
 
 ### Actor model (1973)
+
+https://rocketeer.be/articles/concurrency-in-erlang-scala/
 
 Erlang & Scala
 

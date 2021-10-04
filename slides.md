@@ -135,6 +135,25 @@ h1 {
 layout: image
 ---
 
+![context](/img/one_way.jpg)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+
+---
+layout: image
+---
+
 ![context](/img/system_thread_main.png)
 
 <style>
@@ -307,18 +326,18 @@ layout: center
 
 # Threading
 
+C++, Java, Rust, Haskell,...
 
-```cpp {all|11|15|all}
+```cpp {all|10|4-6|14|all}
 #include <iostream>
 #include <thread>
 
-void foo(int a)
-{
+void foo(int a) {
     std::cout << a << '\n';
 }
 
-int main()
-{
+int main() {
+
     std::thread thread(foo, 10);
 
     // Keep going; the thread is executed separately
@@ -366,6 +385,73 @@ img {
   object-fit: contain;
 }
 </style>
+
+---
+layout: statement
+---
+
+But what if I want <b><span class="text-red-500">a lot</span></b> of threads?
+
+---
+layout: full
+---
+
+<!-- <span style="color:yellow; font-size: 32px; font-weight: bold;">..also shared memory</span> -->
+
+![context](/img/birds_sharing.jpg)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+---
+layout: statement
+---
+
+problems here maybe?
+
+---
+layout: full
+---
+
+<div style="color: #404040;">
+
+<h2> Operating system level:</h2>
+
+<br>
+
+- Processes
+- Threads
+
+</div>
+<br>
+
+<v-click>
+
+## Programming language level:
+
+<br>
+
+- Coroutines
+- Futures and promises (async)
+
+</v-click>
+
+<style>
+font-size: 24px;
+</style>
+
+---
+
+
 
 ---
 layout: image-right
