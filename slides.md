@@ -22,9 +22,7 @@ drawings:
   persist: false
 ---
 
-# Concurrency Patterns
-
-<span class="pt-4">in Go</span>
+<h1 style="color:black">Concurrency Patterns</h1>
 
 <!-- <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -33,21 +31,11 @@ drawings:
 </div> -->
 
 <video autoplay muted loop id="myVideo">
-  <source src="/vid/01_1080p.mp4" type="video/mp4">
+  <source src="/vid/background_yellow.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial;
-  font-size: 17px;
-}
-
 #myVideo {
   z-index: -10;
   position: fixed;
@@ -56,38 +44,25 @@ body {
   min-width: 100%;
   min-height: 100%;
 }
-
-.content {
-  position: fixed;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
-  width: 100%;
-  padding: 20px;
-}
-
 </style>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
 
 ---
 
 <video autoplay muted loop id="myVideo">
-  <source src="/vid/airport.mp4" type="video/mp4">
+  <source src="/vid/concurrent_world.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
 
 <style>
 h1 {
@@ -103,26 +78,294 @@ h1 {
 
 ---
 
-# Navigation
+<video autoplay muted loop id="myVideo">
+  <source src="/vid/more_people.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
 
-### Keyboard Shortcuts
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+---
 
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+<video autoplay muted loop id="myVideo">
+  <source src="/vid/elevators.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
+
+---
+
+<video autoplay muted loop id="myVideo">
+  <source src="/vid/pegeons.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
+
+---
+layout: image
+---
+
+![context](/img/system_thread_main.png)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+---
+
+<video autoplay muted loop id="myVideo">
+  <source src="/vid/airport_conc.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
+
+---
+
+<video autoplay muted loop id="myVideo">
+  <source src="/vid/airport_conc2.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
+
+---
+
+<video autoplay muted loop id="myVideo">
+  <source src="/vid/airport_par.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<style>
+#myVideo {
+  z-index: -10;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>
+
+---
+layout: image
+---
+
+![context](/img/moore.png)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+---
+layout: image
+---
+
+![context](/img/exponential.png)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+---
+layout: image
+---
+
+![context](/img/ibm.jpg)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+---
+layout: image
+---
+
+![context](/img/cloud_fix.png)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+---
+layout: full
+---
+
+## Operating system level:
+
+<br>
+
+- Processes
+- Threads
+
+<v-click>
+
+## Programming language level:
+
+<br>
+
+- Coroutines
+- Futures and promises (async)
+
+</v-click>
+
+<style>
+font-size: 24px;
+</style>
+
+---
+layout: center
+---
+
+# Threading
+
+
+```cpp {all|11|15|all}
+#include <iostream>
+#include <thread>
+
+void foo(int a)
+{
+    std::cout << a << '\n';
+}
+
+int main()
+{
+    std::thread thread(foo, 10);
+
+    // Keep going; the thread is executed separately
+
+    thread.join();
+
+    return 0;
+}
+
+```
+
+---
+layout: image
+---
+
+![context](/img/system_thread_main.png)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
+
+
+---
+layout: center
+---
+
+![context](/img/ideal_threads.png)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  min-width: 100%;
+  max-height: 87%;
+  object-fit: contain;
+}
+</style>
 
 ---
 layout: image-right
