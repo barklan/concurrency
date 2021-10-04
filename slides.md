@@ -24,275 +24,95 @@ drawings:
 
 <h1 style="color:black">Concurrency Patterns</h1>
 
-<!-- <div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div> -->
-
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/background_yellow.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
-
+---
+preload: false
 ---
 
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/concurrent_world.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
+---
+preload: false
 ---
 
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/more_people.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
-
-
+---
+preload: false
 ---
 
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/elevators.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
-
+---
+preload: false
 ---
 
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/pegeons.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
+---
+layout: image
+image: /img/one_way.jpg
+---
 
 ---
 layout: image
+image: /img/system_thread_main.png
 ---
 
-![context](/img/one_way.jpg)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
-
-
 ---
-layout: image
+preload: false
 ---
 
-![context](/img/system_thread_main.png)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
-
----
-
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/airport_conc.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
-
+---
+preload: false
 ---
 
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/airport_conc2.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
-
+---
+preload: false
 ---
 
-<video autoplay muted loop id="myVideo">
+<video autoplay muted loop class="backgroundVideo">
   <source src="/vid/airport_par.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
 </video>
 
-<style>
-#myVideo {
-  z-index: -10;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-</style>
+---
+layout: image
+image: /img/moore.png
+---
 
 ---
 layout: image
+image: /img/exponential.png
 ---
-
-![context](/img/moore.png)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
 
 ---
 layout: image
+image: /img/ibm.jpg
 ---
-
-![context](/img/exponential.png)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
 
 ---
 layout: image
+image: /img/cloud_fix.png
 ---
-
-![context](/img/ibm.jpg)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
-
----
-layout: image
----
-
-![context](/img/cloud_fix.png)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
 
 ---
 layout: full
@@ -351,40 +171,13 @@ int main() {
 
 ---
 layout: image
+image: /img/system_thread_main.png
 ---
 
-![context](/img/system_thread_main.png)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
-
-
 ---
-layout: center
+layout: image
+image: /img/ideal_threads_ex2.png
 ---
-
-![context](/img/ideal_threads.png)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 30px;
-  min-width: 100%;
-  max-height: 87%;
-  object-fit: contain;
-}
-</style>
 
 ---
 layout: statement
@@ -393,24 +186,9 @@ layout: statement
 But what if I want <b><span class="text-red-500">a lot</span></b> of threads?
 
 ---
-layout: full
+layout: image
+image: '/img/birds_sharing.jpg'
 ---
-
-<!-- <span style="color:yellow; font-size: 32px; font-weight: bold;">..also shared memory</span> -->
-
-![context](/img/birds_sharing.jpg)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
 
 ---
 layout: statement
@@ -451,7 +229,29 @@ font-size: 24px;
 
 ---
 
+## Actor model and Process calculus (coroutines)
 
+...
+
+---
+layout: cover
+---
+
+<h2 class="text-black-900">Actor model</h2>
+
+![idris](/img/idris.jpg)
+
+<style>
+img {
+  z-index: -10;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+</style>
 
 ---
 layout: image-right

@@ -52,13 +52,21 @@ Slide with birds sharing:
 
 - also, the only way to communicate is by sharing memory. This can lead to a series of hard to debug problems, as can be seen below.
 
-## and so: Process calculus (алгебра процессов)
+## Actor model and Process calculus
 
-Для такой декомпозиции были придуматы несколько математических моделей (зачем?).
+In computer science, the process calculi (or process algebras) are a diverse family of related approaches for formally modelling concurrent systems. Process calculi provide a tool for the high-level description of interactions, communications, and synchronizations between a collection of independent agents or processes. They also provide algebraic laws that allow process descriptions to be manipulated and analyzed, and permit formal reasoning about equivalences between processes.
+
+Two main approaches: **Actor model** and **Process calculus**.
+
+There are many similarities between the two approaches, but the main difference is
+
+- Processes in the process calculi are anonymous, and communicate by sending messages either through named channels (synchronous or asynchronous), or via ambients (which can also be used to model channel-like communications (Cardelli and Gordon 1998)). In contrast, actors in the Actor model possess an identity, and communicate by sending messages to the mailing addresses of other actors (this style of communication can also be used to model channel-like communications—see below).
 
 ### Actor model (1973)
 
 https://rocketeer.be/articles/concurrency-in-erlang-scala/
+
+The Actor model was inspired by the laws of physics and depends on them for its fundamental axioms, i.e. physical laws (see Actor model theory); the process calculi were originally inspired by algebra (Milner 1993).
 
 Erlang & Scala
 
@@ -69,6 +77,20 @@ Erlang & Scala
 - выбрать поведение, которое будет использоваться при обработке следующего полученного сообщения.
 
 Не предполагается существования определённой последовательности вышеописанных действий и все они могут выполняться параллельно.
+
+Of importance in this model is that all communications are performed asynchronously. This implies that the sender does not wait for a message to be received upon sending it, it immediately continues its execution. There are no guarantees in which order messages will be received by the recipient, but they will eventually be delivered.
+
+A second important property is that all communications happen by means of messages: there is no shared state between actors. If an actor wishes to obtain information about the internal state of another actor, it will have to use messages to request this information. This allows actors to control access to their state, avoiding problems like the lost-update problem. Manipulation of the internal state also happens through messages.
+
+### Erlang
+
+...
+
+### Scala
+
+...
+
+Runs on JVM
 
 ### Process Calculus Family
 
