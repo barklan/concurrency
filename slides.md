@@ -66,6 +66,16 @@ image: /img/one_way.jpg
 ---
 
 ---
+layout: statement
+---
+
+# CONCURRENCY<br>
+
+<h1 style="color:red;">IS NOT</h1>
+
+# PARALLELISM
+
+---
 layout: image
 image: /img/system_thread_main.png
 ---
@@ -94,6 +104,8 @@ preload: false
   <source src="/vid/airport_par.mp4" type="video/mp4">
 </video>
 
+<div style="position: absolute; bottom: 0px; right: 0px; background-color: black; min-height: 50px; min-width: 400px"></div>
+
 ---
 layout: image
 image: /img/moore.png
@@ -115,75 +127,62 @@ image: /img/cloud_fix.png
 ---
 
 ---
-layout: full
+src: ./slides/classification_system.md
 ---
 
-## Operating system level:
+---
+layout: image
+image: /img/process_full.png
+---
+
+<h2 style="color: black; font-size: 40px; text-align: center; margin-top: 60px;">Threading is better than Multiprocessing</h2>
 
 <br>
 
-- Processes
-- Threads
-
-<v-click>
-
-## Programming language level:
-
-<br>
-
-- Coroutines
-- Futures and promises (async)
-
-</v-click>
-
-<style>
-font-size: 24px;
-</style>
+<div v-click style="color: black; text-align: center;">... for single-domain applications</div>
 
 ---
-layout: center
+src: ./slides/multiprocessing.md
 ---
-
-# Threading
-
-C++, Java, Rust, Haskell,...
-
-```cpp {all|10|4-6|14|all}
-#include <iostream>
-#include <thread>
-
-void foo(int a) {
-    std::cout << a << '\n';
-}
-
-int main() {
-
-    std::thread thread(foo, 10);
-
-    // Keep going; the thread is executed separately
-
-    thread.join();
-
-    return 0;
-}
-
-```
 
 ---
 layout: image
 image: /img/system_thread_main.png
 ---
 
+<h2 style="margin: 0 0 0 30%; color: black; font-size: 48px;">Threading</h2>
+
 ---
-layout: image
-image: /img/ideal_threads_ex2.png
+src: ./slides/threading_cpp.md
+---
+
+<!-- --- -->
+<!-- layout: image -->
+<!-- image: /img/ideal_threads_ex2.png -->
+<!-- --- -->
+
+---
+src: ./slides/classification_noasync.md
 ---
 
 ---
 layout: statement
 ---
 
-But what if I want <b><span class="text-red-500">a lot</span></b> of threads?
+## But what if I want <b><span class="text-red-500">a lot</span></b> of threads?
+
+---
+src: ./slides/goroutines.md
+---
+
+---
+layout: center
+---
+
+You are given a task to add 1 to each integer in a list.
+
+
+TODO: you are here. Probably time to start with problems
 
 ---
 layout: image
@@ -191,41 +190,88 @@ image: '/img/birds_sharing.jpg'
 ---
 
 ---
+src: ./slides/cpp_erlang_comparison.md
+---
+
+---
+src: ./slides/sharing_problems.md
+---
+
+---
+preload: false
+---
+
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/racecars.mp4" type="video/mp4">
+</video>
+
+---
+src: ./slides/race_condition_formal.md
+---
+
+---
+preload: false
+---
+
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/train_single_1.mp4" type="video/mp4">
+</video>
+
+---
+preload: false
+---
+
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/train_collision.mp4" type="video/mp4">
+</video>
+
+---
+preload: false
+---
+
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/mov_train_fun.mp4" type="video/mp4">
+</video>
+
+
+---
+src: ./slides/race_condition_go.md
+---
+
+---
+src: ./slides/semaphore.md
+---
+
+---
+src: ./slides/mutex.md
+---
+
+---
+src: ./slides/mutex_go.md
+---
+
+---
+src: ./slides/deadlock_pdd.md
+---
+
+---
+layout: image
+image: /img/deadlock.jpg
+---
+
+---
+src: ./slides/deadlock_go.md
+---
+
+---
 layout: statement
 ---
 
-problems here maybe?
+# Livelock
 
 ---
-layout: full
+src: ./slides/classification.md
 ---
-
-<div style="color: #404040;">
-
-<h2> Operating system level:</h2>
-
-<br>
-
-- Processes
-- Threads
-
-</div>
-<br>
-
-<v-click>
-
-## Programming language level:
-
-<br>
-
-- Coroutines
-- Futures and promises (async)
-
-</v-click>
-
-<style>
-font-size: 24px;
-</style>
 
 ---
 
@@ -234,128 +280,32 @@ font-size: 24px;
 ...
 
 ---
-layout: cover
+layout: image
+image: /img/idris.jpg
 ---
 
-<h2 class="text-black-900">Actor model</h2>
-
-![idris](/img/idris.jpg)
-
-<style>
-img {
-  z-index: -10;
-  position: absolute;
-  right: 0;
-  top: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-}
-</style>
+<h2 style="color: black; font-size: 42px;">Actor model</h2>
 
 ---
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+layout: image
+image: /img/erlang_scala.png
 ---
 
-# Code
+---
+src: ./slides/actor_erlang.md
+---
 
-Use code snippets and get the highlighting directly![^1]
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = {...user, ...update}
-  saveUser(id, newUser)
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+---
+src: ./slides/actor_scala.md
+---
 
 ---
 
 # Components
 
-<div grid="~ cols-2 gap-4">
-<div>
 
-You can use Vue components directly inside your slides.
+<Counter :count="10" m="t-4" />
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-<!-- ```html -->
-<!-- <Counter :count="10" /> -->
-<!-- ``` -->
-
-<!-- ./components/Counter.vue -->
-<!-- <Counter :count="10" m="t-4" /> -->
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
 
 ---
 preload: false
@@ -432,66 +382,3 @@ const final = {
 [Learn More](https://sli.dev/guide/animations.html#motion)
 
 </div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-2 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.9}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
-
----
-layout: center
-class: text-center
----
-
-# Learn More
-
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
