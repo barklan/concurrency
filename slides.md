@@ -139,10 +139,21 @@ image: /img/process_full.png
 
 <br>
 
-<div v-click style="color: black; text-align: center;">... for single-domain applications</div>
+<div v-click style="color: #484893; text-align: center; font-size: 14px;">... for single-domain applications in most cases, terms and conditions apply. Side effects may include nausea and sudden death. Consult your doctor before use.</div>
 
 ---
 src: ./slides/multiprocessing.md
+---
+
+---
+layout: image
+image: /img/chrome.png
+---
+
+<span style="color: black; font-size: ">..but,</span>
+
+---
+src: ./slides/gil.md
 ---
 
 ---
@@ -156,15 +167,6 @@ image: /img/system_thread_main.png
 src: ./slides/threading_cpp.md
 ---
 
-<!-- --- -->
-<!-- layout: image -->
-<!-- image: /img/ideal_threads_ex2.png -->
-<!-- --- -->
-
----
-src: ./slides/classification_noasync.md
----
-
 ---
 layout: statement
 ---
@@ -172,17 +174,41 @@ layout: statement
 ## But what if I want <b><span class="text-red-500">a lot</span></b> of threads?
 
 ---
+layout: image
+image: /img/ideal_threads_ex2.png
+---
+
+---
+src: ./slides/classification_noasync.md
+---
+
+---
 src: ./slides/goroutines.md
 ---
+
+---
+layout: statement
+---
+
+## But <b><span class="text-red-500">why?</span></b>
 
 ---
 layout: center
 ---
 
-You are given a task to add 1 to each integer in a list.
+Add one to each integer in a list.
 
+---
+preload: false
+---
 
-TODO: you are here. Probably time to start with problems
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/communication.mp4" type="video/mp4">
+</video>
+
+<div style="position: absolute; top: 0px; right: 0px; background-color: black; min-height: 60px; min-width: 100%"></div>
+
+<div style="position: absolute; bottom: 0px; right: 0px; background-color: black; min-height: 60px; min-width: 100%"></div>
 
 ---
 layout: image
@@ -190,20 +216,16 @@ image: '/img/birds_sharing.jpg'
 ---
 
 ---
-src: ./slides/cpp_erlang_comparison.md
+layout: center
 ---
 
----
-src: ./slides/sharing_problems.md
----
+example of sharing
 
 ---
-preload: false
+layout: statement
 ---
 
-<video autoplay muted loop class="backgroundVideo">
-  <source src="/vid/racecars.mp4" type="video/mp4">
-</video>
+<h2><span class="text-red-500">Race condition.</span></h2>
 
 ---
 src: ./slides/race_condition_formal.md
@@ -225,6 +247,10 @@ preload: false
   <source src="/vid/train_collision.mp4" type="video/mp4">
 </video>
 
+<div style="position: absolute; top: 0px; right: 0px; background-color: black; min-height: 50px; min-width: 100%"></div>
+
+<div style="position: absolute; bottom: 0px; right: 0px; background-color: black; min-height: 45px; min-width: 100%"></div>
+
 ---
 preload: false
 ---
@@ -233,26 +259,45 @@ preload: false
   <source src="/vid/mov_train_fun.mp4" type="video/mp4">
 </video>
 
-
 ---
-src: ./slides/race_condition_go.md
----
-
----
-src: ./slides/semaphore.md
+layout: center
 ---
 
+race condition code
+
 ---
-src: ./slides/mutex.md
+layout: image
+image: /img/semaphore.jpg
 ---
 
 ---
-src: ./slides/mutex_go.md
+layout: center
+preload: false
 ---
+
+Here should be video of breaking bad with talking pillow
+
+---
+layout: center
+---
+
+solve race example with mutexes
+
+---
+layout: statement
+---
+
+<h2>Race condition. <span class="text-red-500">Deadlock.</span></h2>
 
 ---
 src: ./slides/deadlock_pdd.md
 ---
+
+---
+layout: center
+---
+
+code it?
 
 ---
 layout: image
@@ -260,14 +305,16 @@ image: /img/deadlock.jpg
 ---
 
 ---
-src: ./slides/deadlock_go.md
+layout: statement
 ---
+
+<h2>Race condition. Deadlock. <span class="text-red-500">Starvation.</span></h2>
 
 ---
 layout: statement
 ---
 
-# Livelock
+<h2>Race condition. Deadlock. Starvation. <span class="text-red-500">Livelock.</span></h2>
 
 ---
 src: ./slides/classification.md
@@ -306,79 +353,6 @@ src: ./slides/actor_scala.md
 
 <Counter :count="10" m="t-4" />
 
-
 ---
-preload: false
+src: ./slides/single_thread_langs.md
 ---
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>

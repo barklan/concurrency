@@ -1,3 +1,9 @@
+TODO put it on your own server in case the projector does not connect
+
+TODO remove git markers, bracket colorizer (write down changed settings)
+
+TODO set PS1 to minimal
+
 # Concurrency Patterns
 
 ## Introduction (up to pigeons)
@@ -90,82 +96,121 @@ At the operating system level:
 
 Поток - это «облегченная» единица планирования ядра. В каждом процессе существует по крайней мере один поток. Если в процессе существует несколько потоков, они используют одну и ту же память и файловые ресурсы. Потоки не владеют ресурсами, кроме стека и копии регистров. Процессор (cpu) (не процесс, а процессор) работает с потоками. Он выполняет в одни момент времени один поток. Переключение между потоками - это переключение контекста.
 
+## CPython and Ruby
+
+Теперь нам нужно кое-что убрать. Python имеет многопроцессорность для задач, которые могут выиграть от параллельного выполнения. Это потому, что у Python есть GIL, который ограничевает, что может выполняться только один поток в один момент веремени. А у Ruby есть GVL, который аналогично ограничивает то, что к виртуальной машине Ruby может быть доступ на выполнение только у одного потока. Причина этому, безопасный для потоков интерпретатор или виртуальная машина - это довольно тяжелая вещь. JVM - это потокобезопасная вещь, но она процвела через боль и страдания сначало под поддержкой Sun, пожже Oracle. (Kotlin, Scala). Ни python, ни Ruby не имели таких ресурсов.
+
 // slide with threading
 
 ## Threading
 
-Итак, мы поняли, что нам нужно - многопоточность - разделим. Тут показываю код. Всё классно. Но с этим есть очень тяжелые проблемы. Но прежде, можно представить более высокий способ моделирования конкурентного поведения програмы - уже на уровне выполнения самой программы потому что они разделяют те же проблемы.
-
-// slide with classification
-
-Корутины. Чтобы понять зачем они нужны и почему людям стало нехватать использовать разделения на системные потоки, нужно ответить на вопрос..
+Итак, мы поняли, что нам нужно - многопоточность - разделим. Тут показываю код. Всё классно. Но прежде, можно представить.
 
 // slide with question
 
-..Что если я хочу много потоков?
+..Что если я хочу много потоков? Тогда у меня проблема ресурсов. Потоки довольно легкие, но на создание потока всё же аллоцируется около 500кб и для переключения между потоками процессор должен выполнить контекстный переход. То есть уже для 1000 потоков программе потребуется около полгигабайта и процессор не сможет достаточно быстро циклировать между потоками. То есть когда мы создаем потоки мы на самом деле ограничены довольно жесткими рамками.
 
-Потому что корутины из-за того что могут быть сделаны на уровне языка программирования гораздо легче чем системные потоки, на которые аллоцируется около 500кб при создании (наиболее экстремальным примером была java, у которого jvm агрессивно аллоцировал до 1мб).
+// slide with ideal performance of system threads
+
+// slide with classification
+
+И люди создали корутины (в широком смысле слова). Корутины сделаны на уровне языка программирования гораздо легче чем системные потоки, на которые аллоцируется около 500кб при создании (наиболее экстремальным примером была java, у которого jvm до некоторого времени агрессивно аллоцировал до 1мб на создание потока).
+
+Пример чистой реализации корутин можно показать на примере go. Тут открыть VSCode и создать базовую горутину. У горутин свой стак, который увеличивается или уменьшается по необходимости. Это не систеный поток. Они очень дешевые. На самом деле они мультиплексятся на потоки в отношении M:N.
 
 Тут показать в VSCode, что можно легко создать 1_000_000 корутин.
 
 Но это всё круто, но возвращаясь к вопросу - **Зачем мне нужно столько корутин**. Я их никогда в жизни не распараллелю. Но на самом деле моя цель совсем в другом, я хочу смоделировать поведение реальных агентов, о которых я говорил в начале. Я хочу сделать мою программу фундаментально конкурентной. Можно продемонстрировать на самом тупом примере.
 
-Тут показать в VSCode, 
-
-
-- problems if you mant to allocate lots of threads (Java 8 for example aggresively allocates around 1mb for each thread on creation.)
-
-
-
+Тут показать в VSCode,
 
 
 ## Sharing and communicating
 
+Но модель не полна, потому что между агентами нет никакого общения.
 
-Slide with birds sharing:
+// slide with Key and Peele
 
-- also, the only way to communicate is by sharing memory. This can lead to a series of problems..
+Для выполнения большинства задач нужно общение или синхронизация между агентами.
 
-Slide with cpp and erlang side by side:
+// slide with birds
 
-..and people don't like to micromanage problems, so later they though up of ways to communicate without sharing memory, but first, problems:
+Первое, что люди придумали - это разделение памяти. То есть использовать какой-то общий ресурс, в который можно записывать, или читать из него.
+
+**Code it**
+
+Но это ведет к очнь сложным проблемам.
+
+// slide with problems
 
 ## Problems
 
-### Deadlock
-
-More formal example by Dijkstra
-
-https://en.wikipedia.org/wiki/Dining_philosophers_problem
-
-### Livelock
-
-it's about trying to pass through the door
-
-### Starvation
-
-...
+// slide with race condition
 
 ### Race condition
 
-... Undetermined result at the end of execution. Think of real life example. Also present table example from wiki. Hard to debug manually. Example about golang standard library and implemeted race detector.
+Состояние гонки - возникает, когда два агента пытаются в одно и то же время использовать один общий ресурс при этом не согласовывая своих действий друг с другом.
 
-Real life example - Race condition
+// slide with single train
+
+Например у нас есть поезд, при этом один путь. Если мы добавим второй поезд - получится состояние гонки.
+
+Трудно отлаживать вручную. Пример стандартной библиотеки golang и реализованного детектора гонок.
+
+А вообще аварии на нерегулиремых перекрестках - тоже состояние гонки. Используется общий ресурс несколькими агентами. Еще один пример:
+
+Допустим, у вас есть аквариум с рыбками. Вы кормите рыбок каждый день после школы. Но вы не знаете, что ваша сестра делает то же самое! Когда она приходит домой, она тоже кормит рыб. Пару месяцев и рыбы погибли от перекорма. Здесь ваши незапланированные процедуры кормления были в состоянии гонки: вы не знали, кормили рыбу или нет, поэтому вы оба сделали это, потому что знали, что это должно быть сделано.
+
 Let say that you own a tank of fishes. You feed the fishes every day after you come home from school. But the thing you don't know, is that your sister does the same! When she comes home, she feeds the fishes too. Couple of months and fishes died for overfeeding. Here your unplanned feeding routines were in race condition: you didn't know was the fishes fed or not, so you both did it because you knew that it had to be done.
 
-### Synchronization (one of the solutions to the problem)
+// code it take the previous one
 
-...
+Можем взять те же горутины и представить им общий ресурс (число), к которому они будут прибавлять единицу.
 
-**Semaphore**
+// slide with semaphore
 
-Consider a variable A and a boolean variable S. A is only accessed when S is marked true. Thus, S is a semaphore for A.
+Один из способов её решить - семафор. По сути им может выступать любой индикатор, что ресурс занят. Идею можно немного усложнить и сразу добавить концепцию принадлежности. Т.е. тот, кто заблокировал индикатор, должен его и разблокировать. Пример - горорящая подушка
 
-Here are the examples of race conditions
+// slide with breaking bad
 
-**Mutex**
+// solve race example with mutexes
 
-**Queue**
+Но семафоры или мьютексы могут привести к следующей проблеме.
+
+### Deadlock
+
+// slide with pdd
+
+Каждый говорит, что мьютекс заблокирован машиной справа от него (или если быть совсем точным, то в данной ситуации 4 мьютекса). В итоге все стоят, хотя ресурс перекрестка свободен.
+
+// code it
+
+дороги - мьютексы, перекресток - слайс, машины - горутины (блокируют дорогу -> думают -> блокируют дорогу помехи). Определить функцию помехи справа.
+
+Что такое "действовать по взаимной договоренности". Но даже если мы что-то придумаем, то ситуация становится сложнее в таком случае.
+
+// slide with massive deadlock
+
+И все решения, которые мы придумаем имеют риск привести к еще двум проблемам.
+
+### Starvation
+
+// slide with starvation
+
+### Livelock
+
+// slide with livelock
+
+Это когда вы с кем-то хотите пройти через дверь и уступаете друг другу. Потом одновременно начинаете движение. Потом останавливаетесь. И в итоге вы вдвоем выглядите как придурки, потому что не можете использовать ресурс двери.
+
+
+TODO you are here
+## People though of something better
+
+**here vids of people breaking computers.**
+
+So people don't like to micromanage problems, so later they though up of ways to communicate without sharing memory, but first, problems:
+
 
 ## Actor model and Process calculus
 
@@ -245,7 +290,7 @@ channels, man
 
 Formalized in 1978
 
-![Tony Hoare pic slide]
+// Tony Hoare pic slide
 
 The same dude that invented Quicksort - used currently in C, C++, Java, Python, where there is no requirement for stable sorting.
 
@@ -268,13 +313,6 @@ The syntax of CSP defines the “legal” ways in which processes and events may
 
 Согласно CSP, сначала вводится множество элементарных событий (алфавит), затем из них конструируются процессы, причём из только что описанных процессов можно строить новые. Процессы, протекающие параллельно, обмениваются информацией, используя безбуферный обмен информацией типа «рандеву» между парой (и только парой) процессов посредством специального объекта — канала. При взаимодействии тот участник обмена, который обратился к каналу первым, ожидает готовности партнёра (точки рандеву); при наступлении последней инициируется обмен. Использование общей для нескольких параллельных процессов памяти в CSP не допускается.
 
-It is interesting that with this demands the channel serves two functions - delivering message and synchronizing routines.
-
-Go slightly extends on the idea and adds buffered channels and there is no restriction on the number of clients of the channel.
-
-```go
-code example here
-```
 
 Эта теория привела к созданию occam в 1983 британской компанией для своих же новых Транспьютеров - элемент построения многопроцессорных систем
 
@@ -284,24 +322,36 @@ code example here
 - CSP uses explicit channels for message passing, whereas actor systems transmit messages to named destination actors. These approaches may be considered duals of each other, in the sense that processes receiving through a single channel effectively have an identity corresponding to that channel, while the name-based coupling between actors may be broken by constructing actors that behave as channels.
 - CSP message-passing fundamentally involves a rendezvous between the processes involved in sending and receiving the message, i.e. the sender cannot transmit a message until the receiver is ready to accept it. In contrast, message-passing in actor systems is fundamentally asynchronous, i.e. message transmission and reception do not have to happen at the same time, and senders may transmit messages before receivers are ready to accept them. These approaches may also be considered duals of each other, in the sense that rendezvous-based systems can be used to construct buffered communications that behave as asynchronous messaging systems, while asynchronous systems can be used to construct rendezvous-style communications by using a message/acknowledgement protocol to synchronize senders and receivers.
 
-
-
 ## Now Go
 
-A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space. And the stacks start small, so they are cheap, and grow by allocating (and freeing) heap storage as required.
-Goroutines are multiplexed onto multiple OS threads so if one should block, such as while waiting for I/O, others continue to run. Their design hides many of the complexities of thread creation and management.
+**Introduce challels here**
 
-Each concurrent piece of code (goroutine) does not need to share memory ( shared variables with locks) with other goroutine like how you would typically approach concurrency in most other languages. Instead, it can share memory via communicating with other goroutines ( this is done by sending the data from one goroutine to another via the go channels). By default, when you pass a message, the two goroutines wait till the message is received on the other end.
+// VScode here
 
-The fact that Go supports this natively , covering all the memory management and thread scheduling, makes concurrency easy to implement and efficient in practice from a developer's prospective.
+Go slightly extends on the idea and adds buffered channels and there is no restriction on the number of clients of the channel.
 
-```go
-c := make(chan int)
+// VScode here
 
-go func() {c <- 42}()
+// main idea slide
 
-x := <- c
-```
+Каждому горутине фрагменту кода не нужно делить память (общие переменные с блокировками) с другой горутиной, как вы обычно подходите к конкурентности в большинстве других языков. Вместо этого он может совместно использовать память посредством связи с другими горутинами (это делается путем отправки данных из одной горутины в другую по каналам go). По умолчанию, когда вы передаете сообщение, две горутины ждут, пока сообщение не будет получено на другом конце.
+
+**Это основная идея каналов.**
+
+https://go.dev/blog/codelab-share
+
+Это может быть продемонстрированно с помощью прошлого примера с гонкой
+
+// VScode here
+
+**Then take the previous code with race condition and rewrite using channels**
+
+It is interesting that with this demands the channel serves two functions - delivering message and synchronizing routines.
+
+
+### Some advanced shit with channels
+
+...
 
 ### Real life examples
 
@@ -364,8 +414,4 @@ http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb2
 
 ### Drawbacks
 
-...
-
-
-
-### QA task about race in go
+Важно заметить, что асинхронная модель в том виде в котором она представлена в js и python - это более узкая модель по сравнению с болле общими корутинами (go и scala). Потому что всегда должен быть event loop. Т.е. тот кто всё запускает, и все функции должны добровольно участвовать в нем. С помощью такой модели невозможно в чистом виде сделать пример с перекрестком. Но напротив с помощью корутинной модели можно легко сделать модель асинхронного контроля. (TODO example in go)

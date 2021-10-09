@@ -1,1 +1,0 @@
-go example of mutex

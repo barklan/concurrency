@@ -2,4 +2,4 @@
 layout: statement
 ---
 
-## Starvation. Race condition. Deadlock. Livelock.
+## Race condition. Deadlock. Livelock. Starvation.

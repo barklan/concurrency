@@ -5,21 +5,22 @@ import (
 	"sync"
 )
 
-// multicore race -> one thread false safety
-// -> breaking the safety with timer
 func main() {
-	// runtime.GOMAXPROCS(1)
+	// runtime.GOMAXPROCS(1) // these are os threads
 
 	number := 0
 
-	num_of_routines := 1_000
+	num_of_routines := 1000
 	var wg sync.WaitGroup
 	wg.Add(num_of_routines)
 
 	for i := 0; i < num_of_routines; i++ {
 		go func() {
-			defer wg.Done()
-
+			defer func() {
+				wg.Done()
+				m.Unlock()
+			}()
+			m.Lock()
 			local_number := number
 			number = local_number + 1
 		}()
