@@ -294,10 +294,8 @@ src: ./slides/deadlock_pdd.md
 ---
 
 ---
-layout: center
+src: ./slides/deadlock_pdd_go.md
 ---
-
-code it?
 
 ---
 layout: image
@@ -317,21 +315,26 @@ layout: statement
 <h2>Race condition. Deadlock. Starvation. <span class="text-red-500">Livelock.</span></h2>
 
 ---
-src: ./slides/classification.md
+layout: center
 ---
 
+here should be the picture of a man with problems (technology problems)
+
+---
+layout: center
 ---
 
-## Actor model and Process calculus (coroutines)
-
-...
+here should be video of computer rage
 
 ---
 layout: image
-image: /img/idris.jpg
+image: /img/idris_compose.png
 ---
 
-<h2 style="color: black; font-size: 42px;">Actor model</h2>
+---
+layout: image
+image: /img/elevator_compose.png
+---
 
 ---
 layout: image
@@ -347,12 +350,111 @@ src: ./slides/actor_scala.md
 ---
 
 ---
-
-# Components
-
-
-<Counter :count="10" m="t-4" />
+layout: image
+image: /img/csp_compose.png
+---
 
 ---
-src: ./slides/single_thread_langs.md
+layout: image
+image: /img/csp_sum.png
+---
+
+---
+layout: center
+---
+
+here should be slide with channel picture
+
+---
+layout: center
+---
+
+code it!
+
+---
+src: ./slides/classification.md
+---
+
+---
+layout: image
+image: /img/node.png
+---
+
+---
+src: ./slides/event_loop_intro.md
+---
+
+---
+preload: false
+---
+
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/roller.mp4" type="video/mp4">
+</video>
+
+---
+layout: image
+image: /img/libuv_wide.png
+---
+
+---
+src: ./slides/node_uvloop.md
+---
+
+---
+layout: image
+image: /img/event_loop_ticks.png
+---
+
+---
+layout: image
+image: /img/event_loop_monitor1.png
+---
+
+---
+layout: center
+---
+
+Cluster module...
+
+---
+layout: statement
+---
+
+Callback hell (don't be lazy and find some picture here)
+
+---
+src: ./slides/callback_hell_ground.md
+---
+
+---
+src: ./slides/callback_hell.md
+---
+
+---
+layout: statement
+---
+
+Promises (don't be lazy and find some picture here)
+
+---
+src: ./slides/promises.md
+---
+
+---
+layout: center
+---
+
+`Promise.race()`, `Promise.all()`?
+
+---
+src: ./slides/promise_chain.md
+---
+
+---
+src: ./slides/async_await1.md
+---
+
+---
+src: ./slides/async_await_comparison.md
 ---

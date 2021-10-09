@@ -14,14 +14,12 @@
 
 <div class="grid grid-cols-2 gap-x-4">
 
-<v-click>
+<h2>Programming language level:</h2>
 
-<h2> Programming language level:</h2>
-
-- Coroutines
-- Futures and promises (async)
-
-</v-click>
+<ul>
+    <li>Coroutines</li>
+    <li v-click>Asyncronous control flow (most often I/O), event loop, callbacks, futures/promises, async/await sugar</li>
+</ul>
 
 </div>
 

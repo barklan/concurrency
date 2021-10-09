@@ -203,32 +203,23 @@ Let say that you own a tank of fishes. You feed the fishes every day after you c
 
 Это когда вы с кем-то хотите пройти через дверь и уступаете друг другу. Потом одновременно начинаете движение. Потом останавливаетесь. И в итоге вы вдвоем выглядите как придурки, потому что не можете использовать ресурс двери.
 
+// slide with a frustrated man
 
-TODO you are here
 ## People though of something better
 
-**here vids of people breaking computers.**
+Вобщем люди не любят микроменеджмент проблем.
 
-So people don't like to micromanage problems, so later they though up of ways to communicate without sharing memory, but first, problems:
+// slide with computer rage
 
+Поэтому они сели и начали придумывать способы общения не разделяя ресурсов.
 
-## Actor model and Process calculus
-
-In computer science, the process calculi (or process algebras) are a diverse family of related approaches for formally modelling concurrent systems. Process calculi provide a tool for the high-level description of interactions, communications, and synchronizations between a collection of independent agents or processes. They also provide algebraic laws that allow process descriptions to be manipulated and analyzed, and permit formal reasoning about equivalences between processes.
-
-Two main approaches: **Actor model** and **Process calculus**.
-
-There are many similarities between the two approaches, but the main difference is
-
-- Processes in the process calculi are anonymous, and communicate by sending messages either through named channels (synchronous or asynchronous), or via ambients (which can also be used to model channel-like communications (Cardelli and Gordon 1998)). In contrast, actors in the Actor model possess an identity, and communicate by sending messages to the mailing addresses of other actors (this style of communication can also be used to model channel-like communications—see below).
+// slide with Idris
 
 ### Actor model (1973)
 
 https://rocketeer.be/articles/concurrency-in-erlang-scala/
 
 The Actor model was inspired by the laws of physics and depends on them for its fundamental axioms, i.e. physical laws (see Actor model theory); the process calculi were originally inspired by algebra (Milner 1993).
-
-Erlang & Scala
 
 По аналогии с философией объектно-ориентированного программирования, где каждый примитив рассматривается как объект, модель акторов выделяет в качестве универсальной сущности понятие «актора». Актор является вычислительной сущностью, которая в ответ на полученное сообщение может одновременно:
 
@@ -242,6 +233,23 @@ Of importance in this model is that all communications are performed asynchronou
 
 A second important property is that all communications happen by means of messages: there is no shared state between actors. If an actor wishes to obtain information about the internal state of another actor, it will have to use messages to request this information. This allows actors to control access to their state, avoiding problems like the lost-update problem. Manipulation of the internal state also happens through messages.
 
+// slide with elevator
+
+Now we can describe the whole distributed system as a collection of actors, each with it’s own state, and a collection of circulating messages.
+
+A system transition is made on any of the following:
+
+ - an actor transition,
+ - an actor crashes
+ - a message is lost
+ - an external message is introduced in the system (event)
+
+// slide with erlang and scala logos
+
+Most common languages that heavily use this model is Erlang and Scala.
+
+// slide with erlang code
+
 ### Erlang
 
 A simple application that uses an actor can be seen below. In this application, an actor is defined which acts as a basic counter. We send 100.000 increment messages to the actor and then request it to print its internal value.
@@ -253,6 +261,8 @@ Lines 1 & 2 defines the module and the exported functions. Lines 4 till 7 contai
 Erlang uses a preemptive scheduler for the scheduling of processes [7]. When they have executed for a too long period of time (usually measured in the amount of methods invoked or the amount of CPU-cycles used), or when they enter a receive statement with no messages available, the process is halted and placed on a scheduling queue.
 
 This allows for a large number of processes to run, with a certain amount of fairness. Long running computations will not cause other processes to become unresponsive.
+
+// slide with scala code
 
 ### Scala
 
@@ -273,28 +283,25 @@ Event-based actors provide a more light-weight alternative, allowing for very la
 
 Another potential pit-fall in Scala comes from the fact that it mixes actors with object-oriented programming. It is possible to expose the internal state of an actor through publicly available methods for retrieving and modifying this state. When doing so, it is possible to modify an object by directly invoking its methods, that is: without using messages. Doing so means that you no longer enjoy the safety provided by the actor model.
 
-...
+### Drawbacks
 
+In the real world there is one big obstacle for things to work this way. It’s the receive() statement implemented by almost every major actor framework. This completely breaks the atomicity of actor transitions, it gives them the ability to block, it makes it difficult to test actors and difficult to map the entire system to a mathematical model that can be used in correctness proofs. Receive should be a method implemented by actors, not invoked.
+
+The truth is that for a lot of algorithms, the code that uses threads and blocking requests is way more readable than an actor based implementation. Actors are inherently unreadable because the logic is spread out in different places. Adding the receive() statement slightly alleviates the readability problem at the expense of depriving us from all the nice features that the actor model, as described in the original paper, gave us.
 
 ## Process Calculus Family
 
 CCS, ACP and **CSP**
 
-channels, man
-
-### CCS (Calculus of Communicating - Robin Milner)
-
-...
-
 ### CSP (Communicating sequential processes - Tony Hoare)
 
-Formalized in 1978
+// csp compose slide with Tony Hoare
 
-// Tony Hoare pic slide
+CSP формализована в 1978 в одноименной работе Тони Хоара.
 
 The same dude that invented Quicksort - used currently in C, C++, Java, Python, where there is no requirement for stable sorting.
 
-*Тут общяя теория про CSP*
+// slide with csp example
 
 **Primitives**
 
@@ -305,9 +312,11 @@ Events
 Primitive processes
     Primitive processes represent fundamental behaviors: examples include STOP (the process that communicates nothing, also called deadlock), and SKIP (which represents successful termination).
 
-[here is a slide of csp_syntax]
+// slide with csp summation
 
 The syntax of CSP defines the “legal” ways in which processes and events may be combined. Let e be an event, and X be a set of events. Then the basic syntax of CSP can be defined as:
+
+// slide with channels
 
 **message passing via channels**
 
@@ -324,15 +333,17 @@ The syntax of CSP defines the “legal” ways in which processes and events may
 
 ## Now Go
 
+// **evething up till asynchrony is in VSCode**
+
 **Introduce challels here**
 
-// VScode here
+// code channels
 
 Go slightly extends on the idea and adds buffered channels and there is no restriction on the number of clients of the channel.
 
-// VScode here
+// code buffered channels
 
-// main idea slide
+// TODO examples from Rob Pike talk
 
 Каждому горутине фрагменту кода не нужно делить память (общие переменные с блокировками) с другой горутиной, как вы обычно подходите к конкурентности в большинстве других языков. Вместо этого он может совместно использовать память посредством связи с другими горутинами (это делается путем отправки данных из одной горутины в другую по каналам go). По умолчанию, когда вы передаете сообщение, две горутины ждут, пока сообщение не будет получено на другом конце.
 
@@ -342,76 +353,123 @@ https://go.dev/blog/codelab-share
 
 Это может быть продемонстрированно с помощью прошлого примера с гонкой
 
-// VScode here
-
-**Then take the previous code with race condition and rewrite using channels**
+// take old race code and convert variable to channel
 
 It is interesting that with this demands the channel serves two functions - delivering message and synchronizing routines.
 
-
 ### Some advanced shit with channels
 
-...
-
-### Real life examples
-
-...
+// TODO examples from *learn go by example* , advanced concurrency patterns talk and this article https://go.dev/blog/pipelines
 
 ## Asynchronous
 
-### But first - what is stack in synchronous code
+------------------
 
-### Then event loop
+Extremely low-level:
 
-Steal from here with slides
+https://www.youtube.com/watch?v=P9csgxBgaZ8
 
-https://iximiuz.com/en/posts/explain-event-loop-in-100-lines-of-code/
+The node.js official documentation:
 
-The most obvious examples are asynchronous I/O, UIs. Because we can't wait. More here on that...
+https://nodejs.dev/learn/the-nodejs-event-loop
 
-Video or picture of rollercoaster
+Generally great talk:
 
-### In python specifically
+https://www.youtube.com/watch?v=gl9qHml-mKc
 
-https://www.youtube.com/watch?v=tSLDcRkgTsY
+Extremely high-level:
 
-What is synchronous code?
+https://www.youtube.com/watch?v=zphcsoSJMvM
 
-Synchronous code:
+----------------------
 
-Is what you're used to!
-Runs functions one after another
+// slide with full classification
 
-What is asynchronous code?
+Еще один большой кусок, который можно рассматривать как еще более высокоруровневая абстракция - это асинхронный контроль выполнения.
 
-Asynchronous code:
+В общем вначале я сказал, первая причина конкурентного моделирования - это распараллелить тяжелые вычислительные задачи (CPU-bound). Затем я начал нести какую-то фигню про имитирование каких-то абстрактных агентов (ну вообще не таких абстрактных, если предствить, что если агент - это сервер, и вместе они организуют кластер серверов, которые футболят запросы друг другу). Но большинство небольших публичных сервисов организованы таким образом, что развернут один сервер, который обслуживает множество клиентов, причем возможно даже очень плотный поток клиентов. И чаще всего операции, которые производит сервер не требуют тяжелых вычислений, а связанны с вводом/выводом (или чтением/записью) какой либо информации.
 
-Runs multiple functions seemingly in parallel
-    In a single process
-    Without threads
-Requires cooporative, well-behaving functions
-    Functions that regularly suspend by awaiting something
-Should not use blocking functions!
-    No time.sleep()
-    No socket.*
-    Etc.
-    asyncio provides non-blocking alternatives for many of these functions
+И логика у серверов обычно была организована таким образом, что для каждого запроса создается отдельный поток (Java, Ruby). Но поток это довольно дорогостоящая операция по сравнения с тем объёмом данных, которые нужно было передать клиенту. Но почему тогда не использовать что-то типо абстракции над потоками как в go? Потому что это это довольно общая теория и немного не подходит к таким сервисам для клиентов и всё же не избавляет тех проблем которые я перечислил (хотя и сильно облегчает).
 
-A note on Python versions
+Поэтому люди подумали и придумали еще одну абстракцию - event loop. И я покажу на примере платформы node.js.
 
-The async and await keywords were introduced in Python 3.5
-They are syntactic sugar on top of the asyncio module that was introduced in Python 3.4
+// slide with node.js logo
 
-Python 3.3 and earlier do not support this
+Весь код написанный, пользователем на node работает на одном потоке. В node.js есть thread pool (бассейн потоков) - но они не для пользователя. По умолчанию их 4 в основном для C++ API вызовов, и один для сборщика мусора.
 
-But generator coroutines can do some of the same things
+Чтобы понять, node может обрабатывать тяжелые нагрузки под одним потоком можно простой пример посмотреть.
 
-### In javascript
+// code setTimeout first with 500ms then with 0ms
 
-...
+Большинство программ в одном потоке имеют один стек вызовов, работающий по принципу LIFO (Last In, First Out - Последним вошел, первым вышел). Тогда вопрос сразу почему после последней строчки программи на выходит, а ждет таймер.
 
-http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKbHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZW91dCgpIHsKICAgIGNvbnNvbGUubG9nKCJDbGljayB0aGUgYnV0dG9uISIpOwp9LCA1MDAwKTsKCmNvbnNvbGUubG9nKCJXZWxjb21lIHRvIGxvdXBlLiIpOw%3D%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
+### The event loop
 
-### Drawbacks
+https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
 
-Важно заметить, что асинхронная модель в том виде в котором она представлена в js и python - это более узкая модель по сравнению с болле общими корутинами (go и scala). Потому что всегда должен быть event loop. Т.е. тот кто всё запускает, и все функции должны добровольно участвовать в нем. С помощью такой модели невозможно в чистом виде сделать пример с перекрестком. Но напротив с помощью корутинной модели можно легко сделать модель асинхронного контроля. (TODO example in go)
+https://nodejs.dev/learn/the-nodejs-event-loop
+
+// slide with rollercoaster
+
+// slide with libuv loop diagram
+
+// slide with simplified loop diagram
+
+Each box will be referred to as a "phase" of the event loop.
+
+Each phase has a FIFO queue of callbacks to execute. While each phase is special in its own way, generally, when the event loop enters a given phase, it will perform any operations specific to that phase, then execute callbacks in that phase's queue until the queue has been exhausted or the maximum number of callbacks has executed. When the queue has been exhausted or the callback limit is reached, the event loop will move to the next phase, and so on.
+
+Since any of these operations may schedule more operations and new events processed in the poll phase are queued by the kernel, poll events can be queued while polling events are being processed. As a result, long running callbacks can allow the poll phase to run much longer than a timer's threshold. See the timers and poll sections for more details.
+
+**Phases Overview**
+
+ - timers: this phase executes callbacks scheduled by setTimeout() and setInterval().
+ - pending callbacks: executes I/O callbacks deferred to the next loop iteration.
+ - idle, prepare: only used internally.
+ - poll: retrieve new I/O events; execute I/O related callbacks (almost all with the exception of close callbacks, the ones scheduled by timers, and setImmediate()); node will block here when appropriate.
+ - check: setImmediate() callbacks are invoked here.
+ - close callbacks: some close callbacks, e.g. socket.on('close', ...).
+
+Between each run of the event loop, Node.js checks if it is waiting for any asynchronous I/O or timers and shuts down cleanly if there are not any.
+
+// slide with event loop ticks
+
+// slide with event loop monitoring
+
+// slide with cluster module
+
+### Callback hell
+
+// three slides with callback hell
+
+### Promises
+
+// slide with promises
+
+Обещание обычно определяется как прокси для значения, которое в конечном итоге станет доступным.
+
+// slide with promise chain
+
+### async/await sugar
+
+// slide with async/await sugar
+
+JavaScript за очень короткое время эволюционировал от обратных вызовов до обещаний (ES2015), а с ES2017 асинхронный JavaScript стал еще проще с синтаксисом async / await.
+
+Асинхронные функции представляют собой комбинацию обещаний и генераторов и, по сути, представляют собой абстракцию более высокого уровня по сравнению с обещаниями. Повторяю: async / await построен на обещаниях.
+
+Почему были введены async / await?
+
+Они сокращают количество шаблонов вокруг обещаний и ограничение «не разрывайте цепочку», связанное с цепочкой обещаний.
+
+Когда Promises были представлены в ES2015, они предназначались для решения проблемы с асинхронным кодом, и они это сделали, но за 2 года, которые разделяли ES2015 и ES2017, стало ясно, что обещания не могут быть окончательным решением.
+
+Обещания были введены для решения известной проблемы ада обратного вызова, но они сами по себе внесли сложность и сложность синтаксиса.
+
+Это были хорошие примитивы, вокруг которых разработчикам можно было представить лучший синтаксис, поэтому, когда пришло время, мы получили асинхронные функции.
+
+*Это вообще красиво, от разработчика вообще скрыли имплементацию*
+
+// slide with comparison of promises and async/await
+
+Они заставляют код выглядеть синхронным, но за кулисами он асинхронный и неблокирующий.

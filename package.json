@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "slidev build",
@@ -8,8 +9,7 @@
   "dependencies": {
     "@slidev/cli": ">=0.25.8",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*",
-    "xterm": "^4.14.1"
+    "@slidev/theme-seriph": "*"
   },
   "name": "concurrency"
 }
