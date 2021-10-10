@@ -10,6 +10,7 @@ func main() {
 	for i := 1; i <= 7; i++ {
 		requests <- i
 	}
+
 	close(requests)
 
 	limiter := time.Tick(500 * time.Millisecond)
