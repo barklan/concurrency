@@ -19,13 +19,31 @@ func Gen(name string) <-chan string {
 	return c
 }
 
+func fanIn(input1, input2 <-chan string) <-chan string {
+	c := make(chan string)
+
+	go func() {
+		for {
+			select {
+			case s := <-input1:
+				c <- s
+			case s := <-input2:
+				c <- s
+			}
+		}
+	}()
+
+	return c
+}
+
 func main() {
 	ann := Gen("Ann")
 	joe := Gen("Joe")
 
-	for i := 0; i < 5; i++ {
-		fmt.Println(<-ann)
-		fmt.Println(<-joe)
+	fan := fanIn(ann, joe)
+
+	for i := 0; i < 10; i++ {
+		fmt.Println(<-fan)
 	}
 
 	fmt.Println("Bye!")

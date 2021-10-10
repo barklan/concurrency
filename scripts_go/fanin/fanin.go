@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 )
 
@@ -10,7 +11,7 @@ func Gen(name string) <-chan string {
 
 	go func() {
 		for i := 0; ; i++ {
-			time.Sleep(700 * time.Millisecond)
+			time.Sleep(time.Duration(rand.Intn(2000)) * time.Millisecond)
 			c <- fmt.Sprintf("%v: %v", name, i)
 		}
 	}()
@@ -21,16 +22,29 @@ func Gen(name string) <-chan string {
 func fanIn(input1, input2 <-chan string) <-chan string {
 	c := make(chan string)
 
-	
+	go func() {
+		for {
+			c <- <-input1
+		}
+	}()
+
+	go func() {
+		for {
+			c <- <-input2
+		}
+	}()
+
+	return c
 }
 
 func main() {
 	ann := Gen("Ann")
 	joe := Gen("Joe")
 
-	for i := 0; i < 5; i++ {
-		fmt.Println(<-ann)
-		fmt.Println(<-joe)
+	fan := fanIn(ann, joe)
+
+	for i := 0; i < 10; i++ {
+		fmt.Println(<-fan)
 	}
 
 	fmt.Println("Bye!")
