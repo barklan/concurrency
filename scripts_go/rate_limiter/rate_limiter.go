@@ -11,6 +11,7 @@ func main() {
 		requests <- i
 	}
 
+
 	close(requests)
 
 	limiter := time.Tick(500 * time.Millisecond)
