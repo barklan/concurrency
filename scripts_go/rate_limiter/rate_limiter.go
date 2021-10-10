@@ -15,7 +15,6 @@ func main() {
 
 	limiter := time.Tick(500 * time.Millisecond)
 
-
 	for req := range requests {
 		<-limiter
 		fmt.Println("request", req, time.Now())
