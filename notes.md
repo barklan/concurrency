@@ -112,6 +112,10 @@ At the operating system level:
 
 // slide with ideal performance of system threads
 
+// question but why?
+
+Традиционно серверы были организованы таким образом, что на каждое соединение сервер делала поток (java, ruby), и причем объем данных был довольно, бла бла бла, кластеры серверов.
+
 // slide with classification
 
 И люди создали корутины (в широком смысле слова). Корутины сделаны на уровне языка программирования гораздо легче чем системные потоки, на которые аллоцируется около 500кб при создании (наиболее экстремальным примером была java, у которого jvm до некоторого времени агрессивно аллоцировал до 1мб на создание потока).
@@ -211,9 +215,15 @@ Let say that you own a tank of fishes. You feed the fishes every day after you c
 
 // slide with computer rage
 
-Поэтому они сели и начали придумывать способы общения не разделяя ресурсов.
+Поэтому они сели и начали думать как делать лучше.
 
-// slide with Idris
+// slide with kid and math
+
+// slide with no lock communication theories
+
+И было создано несколько моделей для формального описания общения независимых процессов.
+
+// slide with idris
 
 ### Actor model (1973)
 
@@ -289,10 +299,6 @@ In the real world there is one big obstacle for things to work this way. It’s 
 
 The truth is that for a lot of algorithms, the code that uses threads and blocking requests is way more readable than an actor based implementation. Actors are inherently unreadable because the logic is spread out in different places. Adding the receive() statement slightly alleviates the readability problem at the expense of depriving us from all the nice features that the actor model, as described in the original paper, gave us.
 
-## Process Calculus Family
-
-CCS, ACP and **CSP**
-
 ### CSP (Communicating sequential processes - Tony Hoare)
 
 // csp compose slide with Tony Hoare
@@ -300,8 +306,6 @@ CCS, ACP and **CSP**
 CSP формализована в 1978 в одноименной работе Тони Хоара.
 
 The same dude that invented Quicksort - used currently in C, C++, Java, Python, where there is no requirement for stable sorting.
-
-// slide with csp example
 
 **Primitives**
 

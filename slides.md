@@ -81,6 +81,11 @@ image: /img/system_thread_main.png
 ---
 
 ---
+layout: image
+image: /img/concurrency_ru.png
+---
+
+---
 preload: false
 ---
 
@@ -193,12 +198,6 @@ layout: statement
 ## But <b><span class="text-red-500">why?</span></b>
 
 ---
-layout: center
----
-
-Add one to each integer in a list.
-
----
 preload: false
 ---
 
@@ -216,20 +215,10 @@ image: '/img/birds_sharing.jpg'
 ---
 
 ---
-layout: center
----
-
-example of sharing
-
----
 layout: statement
 ---
 
 <h2><span class="text-red-500">Race condition.</span></h2>
-
----
-src: ./slides/race_condition_formal.md
----
 
 ---
 preload: false
@@ -260,10 +249,8 @@ preload: false
 </video>
 
 ---
-layout: center
+src: ./slides/race_condition_go.md
 ---
-
-race condition code
 
 ---
 layout: image
@@ -271,17 +258,16 @@ image: /img/semaphore.jpg
 ---
 
 ---
-layout: center
 preload: false
 ---
 
-Here should be video of breaking bad with talking pillow
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/breaking_bad.mp4" type="video/mp4">
+</video>
 
 ---
-layout: center
+src: ./slides/mutex_go.md
 ---
-
-solve race example with mutexes
 
 ---
 layout: statement
@@ -315,16 +301,21 @@ layout: statement
 <h2>Race condition. Deadlock. Starvation. <span class="text-red-500">Livelock.</span></h2>
 
 ---
-layout: center
+layout: image
+image: /img/problems.jpg
 ---
 
-here should be the picture of a man with problems (technology problems)
-
 ---
-layout: center
+preload: false
 ---
 
-here should be video of computer rage
+<video autoplay muted loop class="backgroundVideo">
+  <source src="/vid/kid_and_math.mp4" type="video/mp4">
+</video>
+
+---
+src: ./slides/no_lock_communication.md
+---
 
 ---
 layout: image
@@ -360,16 +351,18 @@ image: /img/csp_sum.png
 ---
 
 ---
+src: ./slides/go_chan.md
+---
+
+---
+src: ./slides/race_condition_go_chan.md
+---
+
+---
 layout: center
 ---
 
-here should be slide with channel picture
-
----
-layout: center
----
-
-code it!
+"generators", "annjoe", "fanin"
 
 ---
 src: ./slides/classification.md
@@ -391,6 +384,8 @@ preload: false
 <video autoplay muted loop class="backgroundVideo">
   <source src="/vid/roller.mp4" type="video/mp4">
 </video>
+
+<h1 style="border-radius: 10px; padding: 30px; background-color: white; color:black; right: 100px; position: fixed; font-size: 50px">Event Loop</h1>
 
 ---
 layout: image
@@ -418,24 +413,12 @@ layout: center
 Cluster module...
 
 ---
-layout: statement
----
-
-Callback hell (don't be lazy and find some picture here)
-
----
 src: ./slides/callback_hell_ground.md
 ---
 
 ---
 src: ./slides/callback_hell.md
 ---
-
----
-layout: statement
----
-
-Promises (don't be lazy and find some picture here)
 
 ---
 src: ./slides/promises.md

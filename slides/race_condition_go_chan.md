@@ -1,14 +1,9 @@
-package main
+---
+layout: center
+---
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
-
+```go {all|2-3|13-15|all}
 func main() {
-	// runtime.GOMAXPROCS(1)
-
 	channel := make(chan int, 1)
 	channel <- 0
 
@@ -23,10 +18,16 @@ func main() {
 			local_number := <-channel
 			time.Sleep(1 * time.Microsecond)
 			channel <- local_number + 1
-			// число = копия + 1
 		}()
 	}
 
 	wg.Wait()
 	fmt.Println(<-channel)
 }
+```
+
+<style>
+code {
+	font-size: 16px;
+}
+</style>

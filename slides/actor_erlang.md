@@ -4,6 +4,8 @@ layout: center
 
 <div>
 
+<span style="color:grey">Erlang</span>
+
 ```erlang {all|9-13|10-12|16-18|17|4-7|all}
 -module(counter).
 -export([run/0, counter/1]).

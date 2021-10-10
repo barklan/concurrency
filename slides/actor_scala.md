@@ -4,6 +4,8 @@ layout: center
 
 <div class="grid grid-cols-2 gap-x-4"><div>
 
+<span style="color:grey">Scala</span>
+
 ```scala {all|7-21|13-17|all}
 import scala.actors.Actor
 import scala.actors.Actor._
@@ -31,6 +33,8 @@ class Counter extends Actor {
 </div>
 
 <div v-click>
+
+<span style="color:grey; visibility: hidden;">Scala</span>
 
 ```scala
 object ActorTest extends Application {
