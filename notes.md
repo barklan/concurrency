@@ -1,9 +1,5 @@
 TODO put it on your own server in case the projector does not connect
 
-TODO remove git markers, bracket colorizer (write down changed settings)
-
-TODO set PS1 to minimal
-
 # Concurrency Patterns
 
 ## Introduction (up to pigeons)
@@ -347,7 +343,6 @@ Go slightly extends on the idea and adds buffered channels and there is no restr
 
 // code buffered channels
 
-// TODO examples from Rob Pike talk
 
 Каждому горутине фрагменту кода не нужно делить память (общие переменные с блокировками) с другой горутиной, как вы обычно подходите к конкурентности в большинстве других языков. Вместо этого он может совместно использовать память посредством связи с другими горутинами (это делается путем отправки данных из одной горутины в другую по каналам go). По умолчанию, когда вы передаете сообщение, две горутины ждут, пока сообщение не будет получено на другом конце.
 
@@ -362,8 +357,6 @@ https://go.dev/blog/codelab-share
 It is interesting that with this demands the channel serves two functions - delivering message and synchronizing routines.
 
 ### Some advanced shit with channels
-
-// TODO examples from *learn go by example* , advanced concurrency patterns talk and this article https://go.dev/blog/pipelines
 
 ## Asynchronous
 
