@@ -9,7 +9,8 @@
   "dependencies": {
     "@slidev/cli": ">=0.25.8",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*"
+    "@slidev/theme-seriph": "*",
+    "node-fetch": "^3.0.0"
   },
   "name": "concurrency"
 }

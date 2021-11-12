@@ -1,5 +1,3 @@
-TODO put it on your own server in case the projector does not connect
-
 # Concurrency Patterns
 
 ## Introduction (up to pigeons)

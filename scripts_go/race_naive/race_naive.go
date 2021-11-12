@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 func main() {
-	// runtime.GOMAXPROCS(1) // these are os threads
+	// runtime.GOMAXPROCS(4) // these are os threads
 
 	number := 0
 
@@ -20,7 +21,10 @@ func main() {
 				wg.Done()
 			}()
 
-			number++
+			b := number
+			time.Sleep(time.Second)
+			b++
+			number = b
 		}()
 	}
 
